@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProductService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">NeuralNawab</a> &gt; <a href="index.source.html" class="el_package">com.example.NeuralNawab.service</a> &gt; <span class="el_source">ProductService.java</span></div><h1>ProductService.java</h1><pre class="source lang-java linenums">package com.example.NeuralNawab.service;
+
+import com.example.NeuralNawab.model.Product;
+import org.springframework.stereotype.Service;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+@Service
+<span class="fc" id="L10">public class ProductService {</span>
+
+<span class="fc" id="L12">    public List&lt;Product&gt;  products = new ArrayList&lt;&gt;(Arrays.asList(</span>
+            new Product(101, &quot;iPhone&quot;,50000),
+            new Product(102, &quot;Android&quot;,30000),
+            new Product(103, &quot;MacBook&quot;,250000)
+    ));
+
+    public List&lt;Product&gt; getProducts() {
+<span class="nc" id="L19">        return products;</span>
+    }
+
+    public Product getProductById(int prodId) {
+<span class="nc" id="L23">        return products.stream()</span>
+<span class="nc bnc" id="L24" title="All 2 branches missed.">                .filter(p -&gt; p.getProdId() == prodId)</span>
+<span class="nc" id="L25">                .findFirst()</span>
+<span class="nc" id="L26">                .orElse(new Product(100, &quot;No Item&quot;,0));</span>
+    }
+
+    public List&lt;Product&gt; addProduct(Product prod) {
+<span class="nc" id="L30">        products.add(prod);</span>
+<span class="nc" id="L31">        return products;</span>
+    }
+
+    public List&lt;Product&gt; addProducts(List&lt;Product&gt; prods) {
+<span class="nc" id="L35">        products.addAll(prods);</span>
+<span class="nc" id="L36">        return products;</span>
+    }
+
+    public List&lt;Product&gt; deleteProduct(int prodId) {
+<span class="nc bnc" id="L40" title="All 2 branches missed.">        products.removeIf(p -&gt; p.getProdId() == prodId);</span>
+<span class="nc" id="L41">        return products;</span>
+    }
+
+    public List&lt;Product&gt; updateProduct(Product prod) {
+<span class="nc" id="L45">        Product reqProd = getProductById(prod.getProdId());</span>
+<span class="nc" id="L46">        int index = products.indexOf(reqProd);</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">        if(index != -1) {</span>
+<span class="nc" id="L48">            products.set(index, prod);</span>
+        }
+<span class="nc" id="L50">        return products;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
